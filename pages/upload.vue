@@ -7,7 +7,7 @@
         <h2>📋 Instrucciones</h2>
         <ol>
           <li>Exporta tu historial desde MT5: <code>Historial → Guardar como Informe</code></li>
-          <li>Selecciona formato <strong>CSV</strong></li>
+          <li>Selecciona formato <strong>CSV o XLSX</strong></li>
           <li>Arrastra el archivo aquí o haz clic para seleccionar</li>
         </ol>
       </div>
@@ -22,14 +22,14 @@
         <input
           ref="fileInput"
           type="file"
-          accept=".csv"
+          accept=".csv,.xlsx"
           @change="handleFileSelect"
           class="file-input"
         />
         
         <div class="dropzone-content" @click="($refs.fileInput as HTMLInputElement)?.click()">
           <div class="icon">📁</div>
-          <p class="title">Arrastra tu archivo CSV aquí</p>
+          <p class="title">Arrastra tu archivo CSV o XLSX aquí</p>
           <p class="subtitle">o haz clic para seleccionar</p>
         </div>
       </div>
@@ -92,8 +92,8 @@ const handleFileSelect = (e: Event) => {
 }
 
 const validateAndSetFile = (file: File) => {
-  if (!file.name.endsWith('.csv')) {
-    error.value = 'Solo se aceptan archivos CSV'
+  if (!file.name.endsWith('.csv') && !file.name.endsWith('.xlsx')) {
+    error.value = 'Solo se aceptan archivos CSV o XLSX'
     return
   }
   

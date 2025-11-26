@@ -12,11 +12,12 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "vue": "^3.3.0",
+    "@pinia/nuxt": "^0.5.0",
+    "lightweight-charts": "^5.0.9",
     "nuxt": "^3.8.0",
     "pinia": "^2.1.0",
-    "@pinia/nuxt": "^0.5.0",
-    "plotly.js-dist-min": "^2.26.0"
+    "plotly.js-dist-min": "^2.26.0",
+    "vue": "^3.3.0"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.0.0",

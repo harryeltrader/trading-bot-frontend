@@ -32,6 +32,8 @@
             v-for="trade in sortedTrades" 
             :key="trade.id" 
             :class="`status-${trade.status}`"
+            @click="selectedTrade = trade"
+            class="cursor-pointer"
           >
             <td>{{ formatDate(trade.open_time) }}</td>
             <td class="font-bold">{{ trade.symbol }}</td>
@@ -63,12 +65,19 @@
     <div v-if="!loading" class="table-footer">
       Mostrando {{ trades.length }} de {{ total || trades.length }} operaciones
     </div>
+
+    <TradeChartModal 
+      v-if="selectedTrade" 
+      :trade="selectedTrade" 
+      @close="selectedTrade = null" 
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { Trade } from '~/types/analytics'
+import TradeChartModal from './TradeChartModal.vue'
 
 const props = defineProps<{
   trades: Trade[]
@@ -78,6 +87,7 @@ const props = defineProps<{
 
 const sortColumn = ref('open_time')
 const sortOrder = ref<'asc' | 'desc'>('desc')
+const selectedTrade = ref<Trade | null>(null)
 
 const sortedTrades = computed(() => {
   const sorted = [...props.trades].sort((a: any, b: any) => {
